@@ -1,35 +1,49 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <math.h>
-
+/*
+*Asks the user for an amount of dollars, which it converts to pennies. It then
+*checks for the biggest coin that fits in this amount. By doing this it eventually
+*finds the minimum amount of coins needed for the given amount
+*
+*Thomas Komen, 12556963
+*/
 int main(void)
 {
-    float famount = -1.00;
-    while(!(famount>0))
+    float float_change;
+    do
     {
-        famount = get_float("Enter an amount: ");
+        float_change = get_float("Change owed: ");
     }
-    int amount = round(famount*100);
+    while (float_change < 0);
+
+    //coverts the change from dollars to pennies
+    int change = round(float_change * 100);
     int coins = 0;
-    while(amount>=25)
+
+    //goes through the available coins from largest to smallest, checking if
+    //they fit in the remaining change, and removing the coin amount from the change
+    //if it does
+    while (change >= 25)
     {
-        amount -= 25;
+        change -= 25;
         coins += 1;
     }
-    while(amount>=10)
+    while (change >= 10)
     {
-        amount -= 10;
+        change -= 10;
         coins += 1;
     }
-    while(amount>=5)
+    while (change >= 5)
     {
-        amount -= 5;
+        change -= 5;
         coins += 1;
     }
-    while(amount>=1)
+    while (change >= 1)
     {
-        amount -= 1;
+        change -= 1;
         coins += 1;
     }
+
     printf("%i\n", coins);
 }
